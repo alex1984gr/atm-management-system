@@ -5,7 +5,7 @@ const char *RECORDS = "./data/records.txt";
 // reads one record from file, returns 0 on EOF
 int getAccountFromFile(FILE *ptr, char name[50], struct Record *r)
 {
-    return fscanf(ptr, "%d %d %s %d %d/%d/%d %s %d %lf %s",
+    return fscanf(ptr, "%d %d %s %d %d/%d/%d %s %ld %lf %s",
                   &r->id,
                   &r->userId,
                   name,
@@ -22,7 +22,7 @@ int getAccountFromFile(FILE *ptr, char name[50], struct Record *r)
 // writes one record to file
 void saveAccountToFile(FILE *ptr, struct User u, struct Record r)
 {
-    fprintf(ptr, "%d %d %s %d %d/%d/%d %s %d %.2lf %s\n\n",
+    fprintf(ptr, "%d %d %s %d %d/%d/%d %s %ld %.2lf %s\n\n",
             r.id,
             u.id,
             u.name,
@@ -156,7 +156,7 @@ void checkAllAccounts(struct User u)
         if (strcmp(userName, u.name) == 0)
         {
             printf("_____________________\n");
-            printf("\nAccount number  : %d\nDeposit Date    : %d/%d/%d\nCountry         : %s\nPhone number    : %d\nAmount deposited: $%.2f\nType of account : %s\n",
+            printf("\nAccount number  : %d\nDeposit Date    : %d/%d/%d\nCountry         : %s\nPhone number    : %ld\nAmount deposited: $%.2f\nType of account : %s\n",
                    r.accountNbr,
                    r.deposit.day,
                    r.deposit.month,
@@ -190,7 +190,7 @@ void checkAccount(struct User u)
         {
             found = 1;
             printf("\n_____________________\n");
-            printf("\nAccount number  : %d\nDeposit Date    : %d/%d/%d\nCountry         : %s\nPhone number    : %d\nAmount deposited: $%.2f\nType of account : %s\n",
+            printf("\nAccount number  : %d\nDeposit Date    : %d/%d/%d\nCountry         : %s\nPhone number    : %ld\nAmount deposited: $%.2f\nType of account : %s\n",
                    r.accountNbr,
                    r.deposit.day,
                    r.deposit.month,
@@ -271,7 +271,7 @@ void updateAccount(struct User u)
             }
         }
         // write record (updated or unchanged) to temp file
-        fprintf(tmp, "%d %d %s %d %d/%d/%d %s %d %.2lf %s\n\n",
+        fprintf(tmp, "%d %d %s %d %d/%d/%d %s %ld %.2lf %s\n\n",
                 r.id, r.userId, userName,
                 r.accountNbr,
                 r.deposit.month, r.deposit.day, r.deposit.year,
@@ -335,7 +335,7 @@ void makeTransaction(struct User u)
                 printf("\nNew balance: $%.2f\n", r.amount);
             }
         }
-        fprintf(tmp, "%d %d %s %d %d/%d/%d %s %d %.2lf %s\n\n",
+        fprintf(tmp, "%d %d %s %d %d/%d/%d %s %ld %.2lf %s\n\n",
                 r.id, r.userId, userName,
                 r.accountNbr,
                 r.deposit.month, r.deposit.day, r.deposit.year,
@@ -373,7 +373,7 @@ void removeAccount(struct User u)
             found = 1;
             continue;
         }
-        fprintf(tmp, "%d %d %s %d %d/%d/%d %s %d %.2lf %s\n\n",
+        fprintf(tmp, "%d %d %s %d %d/%d/%d %s %ld %.2lf %s\n\n",
                 r.id, r.userId, userName,
                 r.accountNbr,
                 r.deposit.month, r.deposit.day, r.deposit.year,
@@ -433,7 +433,7 @@ void transferOwner(struct User u)
             found = 1;
             // change owner to new user
             r.userId = tmp.id;
-            fprintf(tf, "%d %d %s %d %d/%d/%d %s %d %.2lf %s\n\n",
+            fprintf(tf, "%d %d %s %d %d/%d/%d %s %ld %.2lf %s\n\n",
                     r.id, tmp.id, newOwner,
                     r.accountNbr,
                     r.deposit.month, r.deposit.day, r.deposit.year,
@@ -441,7 +441,7 @@ void transferOwner(struct User u)
         }
         else
         {
-            fprintf(tf, "%d %d %s %d %d/%d/%d %s %d %.2lf %s\n\n",
+            fprintf(tf, "%d %d %s %d %d/%d/%d %s %ld %.2lf %s\n\n",
                     r.id, r.userId, userName,
                     r.accountNbr,
                     r.deposit.month, r.deposit.day, r.deposit.year,
