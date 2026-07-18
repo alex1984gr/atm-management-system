@@ -14,7 +14,8 @@ void mainMenu(struct User u)
     printf("\n\t\t[6]- Remove existing account\n");
     printf("\n\t\t[7]- Transfer ownership\n");
     printf("\n\t\t[8]- Exit\n");
-    scanf("%d", &option);
+    while (!readInt(&option))
+        printf("Insert a valid number: ");
 
     switch (option)
     {
@@ -60,7 +61,11 @@ void initMenu(struct User *u)
     printf("\n\t\t[3]- exit\n");
     while (!r)
     {
-        scanf("%d", &option);
+        if (!readInt(&option))
+        {
+            printf("Insert a valid number!\n");
+            continue;
+        }
         switch (option)
         {
         case 1:

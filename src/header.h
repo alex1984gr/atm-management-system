@@ -14,7 +14,7 @@ struct Record
     int userId;
     char name[100];
     char country[100];
-    long phone;
+    char phone[20];
     char accountType[10];
     int accountNbr;
     double amount;
@@ -45,3 +45,4 @@ void removeAccount(struct User u);
 void transferOwner(struct User u);
 void success(struct User u);
 void stayOrReturn(int notGood, void f(struct User u), struct User u);
+int readInt(int *value);
